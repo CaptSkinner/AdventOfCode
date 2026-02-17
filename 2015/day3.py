@@ -1,4 +1,4 @@
-file = "day3.txt"
+file = "../Inputs/day3.txt"
 with open(file, 'r') as file:
     movements = file.read()
 

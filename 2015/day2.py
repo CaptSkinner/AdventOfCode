@@ -1,4 +1,4 @@
-file = "day2.txt"
+file = "../Inputs/day2.txt"
 with open(file, 'r') as file:
     presents = file.read()
 
