@@ -19,5 +19,3 @@ for movement in movements:
     house_stops.add((x, y))
 print(house_stops)
 print(len(house_stops))
-
-
