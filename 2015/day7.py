@@ -2,6 +2,7 @@ file = "../Inputs/day7.txt"
 with open(file, 'r') as file:
     instructions = file.read().split("\n")
 
+original_instructions = instructions.copy()  # ← Save a copy!
 wire_diagram = {}
 
 def get_value(input_str):
@@ -48,8 +49,16 @@ def install_wires(instructions):
                 remaining.append(instruction)
 
         instructions = remaining
-
-
+        print(remaining)
 
 install_wires(instructions)
-print(wire_diagram["a"])
+first_a = wire_diagram["a"]
+print(f"First run a = {first_a}")
+
+wire_diagram.clear()
+wire_diagram["b"] = first_a
+
+instructions = [inst for inst in original_instructions if not inst.endswith("-> b")]
+
+install_wires(instructions)
+print(f"Second run a = {wire_diagram['a']}")
