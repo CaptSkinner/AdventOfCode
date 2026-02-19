@@ -38,8 +38,8 @@ def install_wires(instructions):
                     wire_diagram[destination] = get_value(parts_op[0]) >> int(parts_op[1])
 
                 elif "NOT" in source:
-                    source1 = source.replace("NOT ", "")
-                    wire_diagram[destination] = ~(get_value(source1)) & 0xFFFF
+                    wire_source = source.replace("NOT ", "")
+                    wire_diagram[destination] = ~(get_value(wire_source)) & 0xFFFF
 
                 else:
                     val = get_value(source)
