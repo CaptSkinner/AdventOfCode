@@ -1,5 +1,3 @@
-import time
-
 file = "../Inputs/day8.txt"
 with open(file, 'r') as file:
     strings_list = file.read().split("\n")
@@ -20,7 +18,6 @@ def count_mem_char(strings_list):
         index = 0
 
         while index < len(string):
-            time.sleep(.001)
             if string[index] == "\\":
                 if string[index + 1] == "\\":
                     char_count += 1
@@ -38,14 +35,34 @@ def count_mem_char(strings_list):
         total_memory += char_count
 
         # Print progress every 10%
-        if (i + 1) % (total_strings // 10) == 0:
-            percent = ((i + 1) / total_strings) * 100
-            print(f"Progress: {percent:.0f}%")
-
     return total_memory
-
 
 strings_memory = count_mem_char(strings_list)
 print(f"Literal: {strings_literal}")
 print(f"Memory: {strings_memory}")
 print(f"Difference: {strings_literal - strings_memory}")
+
+
+def count_encoded_char(strings_list):
+    total_encoded = 0
+
+    for string in strings_list:
+        encoded_length = len(string) + 2
+
+        for char in string:
+                if char == "\\" or char == '"':
+                    encoded_length += 1
+
+        total_encoded += encoded_length
+
+    return total_encoded
+
+
+# Using your existing strings_list
+strings_encoded = count_encoded_char(strings_list)
+
+print(f"Encoded Total: {strings_encoded}")
+print(f"Original Literal: {strings_literal}")
+print(f"Difference (Part 2): {strings_encoded - strings_literal}")
+
+
