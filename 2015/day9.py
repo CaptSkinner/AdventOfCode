@@ -33,7 +33,7 @@ for route in routes:
         city_list.add(departure)
         city_list.add(destination)
 
-min_dist = 999999999
+min_dist = 0
 def find_shortest(current_path, remaining_cities):
     global min_dist
 
@@ -44,7 +44,7 @@ def find_shortest(current_path, remaining_cities):
             city_b = current_path[i + 1]
             this_trip_dist += flights_array[city_a][city_b]
 
-        if this_trip_dist < min_dist:
+        if this_trip_dist > min_dist:
             min_dist = this_trip_dist
 
 
