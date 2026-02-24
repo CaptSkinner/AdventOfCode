@@ -15,7 +15,7 @@ for route in routes:
         # capture departure and destination cities
         departure = str(destinations.split(" to ")[0])
         destination = str(destinations.split(" to ")[1])
-        # build city total city list
+        # build city total list
         city_list.add(departure)
         city_list.add(destination)
 
