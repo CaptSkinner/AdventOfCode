@@ -1,4 +1,4 @@
-#WIP
+# Part 1 completed
 
 file = "../Inputs/day9.txt"
 with open(file, 'r') as file:
@@ -33,8 +33,31 @@ for route in routes:
         city_list.add(departure)
         city_list.add(destination)
 
-print(flights_array)
+min_dist = 999999999
+def find_shortest(current_path, remaining_cities):
+    global min_dist
 
+    if not remaining_cities:
+        this_trip_dist = 0
+        for i in range(len(current_path) - 1):
+            city_a = current_path[i]
+            city_b = current_path[i + 1]
+            this_trip_dist += flights_array[city_a][city_b]
+
+        if this_trip_dist < min_dist:
+            min_dist = this_trip_dist
+
+
+    for path in range(len(remaining_cities)):
+        next_city = remaining_cities[path]
+        new_remaining = remaining_cities[:path] + remaining_cities[path + 1:]
+
+        find_shortest(current_path + [next_city], new_remaining)
+
+
+
+find_shortest([], list(city_list))
+print(min_dist)
 
 
 
