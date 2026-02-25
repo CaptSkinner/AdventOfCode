@@ -16,7 +16,7 @@ def get_las(input):
     return "".join(output)
 
 result = input
-for attempts in range(40):
+for attempts in range(50):
     result = get_las(result)
 
 print(len(result))
