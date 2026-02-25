@@ -1,25 +1,19 @@
-input = "33113322113"
-# "Look-and-say" 40 iterations
-# if not repeated + 1n
-# if repeated + t_repeated+n
+# WIP only working with a single digit on the end
+# need to add guardrail for the index out of range
+input = "3113322113"
 
 def get_las(input):
-    output = ""
-    for number in range(len(input)):
-        if input[number] == input[number]:
-            output += "2" + input[number]
-            number + 2
-        else:
-            output += input[number]
-            number + 1
+    output = []
+    index = 0
+    counter = 1
+    while index + 1 < len(str(input)):
+        while input[index] == input[index + 1]:
+            counter += 1
+            index += 1
+        output.append(str(counter) + input[index])
+        index += 1
+        counter = 1
+    output.append(str(counter) + input[index])
+    return "".join(output)
 
-        print(output)
-
-
-
-
-
-
-get_las(input)
-
-
+print(get_las(input))
