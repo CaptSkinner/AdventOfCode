@@ -25,11 +25,44 @@ def calculate_reindeer_distance_no_regex(data, race_duration):
 
     return results
 
+
+def calculate_reindeer_points(data, race_duration):
+    reindeers = []
+
+    for lines in data.strip().split('\n'):
+        reindeer = lines.split()
+        reindeers.append({
+            "name": reindeer[0],
+            "speed": int(reindeer[3]),
+            "fly_limit": int(reindeer[6]),
+            "rest_limit": int(reindeer[13]),
+            "distance": 0,
+            "points": 0
+        })
+
+    for second in range(1, race_duration + 1):
+        for r in reindeers:
+            cycle_time = r["fly_limit"] + r["rest_limit"]
+
+            if 0 < (second % cycle_time) <= r["fly_limit"]:
+                r["distance"] += r["speed"]
+
+        lead_distance = max(r["distance"] for r in reindeers)
+
+        for r in reindeers:
+            if r["distance"] == lead_distance:
+                r["points"] += 1
+
+    return reindeers
+
+
 race_duration = 2503
 distances = calculate_reindeer_distance_no_regex(reindeer, race_duration)
+final_stats = calculate_reindeer_points(reindeer, race_duration)
 
 winner_name, winner_dist = max(distances, key=lambda x: x[1])
+winner = max(final_stats, key=lambda x: x["points"])
 
 print(f"The winner is {winner_name} with {winner_dist} km!")
-
+print(f"The winner by points is {winner['name']} with {winner['points']} points!")
 
