@@ -31,12 +31,43 @@ def parse_sues(aunties):
         sues[sue_id] = props
     return sues
 
-def find_sue(sues, wrapping_paper):
+
+def find_sue_part2(sues, wrapping_paper):
     for sue_id, props in sues.items():
-        if all(wrapping_paper.get(k) == v for k, v in props.items()):
+        is_match = True
+
+        for key, val in props.items():
+            target = wrapping_paper[key]
+
+            # Special logic for cats and trees (Greater than)
+            if key in ["cats", "trees"]:
+                if val <= target:
+                    is_match = False
+                    break
+
+            # Special logic for pomeranians and goldfish (Less than)
+            elif key in ["pomeranians", "goldfish"]:
+                if val >= target:
+                    is_match = False
+                    break
+
+            # Exact match for everything else
+            else:
+                if val != target:
+                    is_match = False
+                    break
+
+        if is_match:
             return sue_id
+
     return None
 
+
+# Then call the new function
 sues = parse_sues(aunties)
-answer = find_sue(sues, wrapping_paper)
+answer_part2 = find_sue_part2(sues, wrapping_paper)
+print(f"Aunt Sue number (Part 2): {answer_part2}")
+
+sues = parse_sues(aunties)
+answer = find_sue_part2(sues, wrapping_paper)
 print(f"Aunt Sue number: {answer}")
